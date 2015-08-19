@@ -1,4 +1,6 @@
-# completed using http://soledadpenades.com/2009/10/29/fastest-way-to-generate-wav-files-in-python-using-the-wave-module/ as a reference
+# lots of code used from other sites; not all my own work!
+# Some code from http://stackoverflow.com/a/311634/2605023 and
+# http://soledadpenades.com/2009/10/29/fastest-way-to-generate-wav-files-in-python-using-the-wave-module/
 
 import sys
 import os
