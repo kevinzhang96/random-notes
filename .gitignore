@@ -55,3 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# don't include any wav files in this project
+wavs*
