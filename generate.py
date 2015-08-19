@@ -42,7 +42,6 @@ else:
         value = FREQARRAY[random.randint(0, len(FREQARRAY) - 1)]
         packed_value = struct.pack('h', value)
 
-        print 'Writing value ' + str(value)
         period = float(FPS / NOTERATE) / float(value)
         omega = numpy.pi * 2 / period
         xaxis = numpy.arange(int(period), dtype = numpy.float) * omega
@@ -58,3 +57,30 @@ else:
 
     output.writeframes(value_str)
     output.close()
+
+    if os.name == 'nt':
+        import winsound
+
+        winsound.PlaySound(FileName, winsound.SND_FILENAME)
+    elif os.name == 'posix':
+        import subprocess
+
+        subprocess.call(["afplay", FileName])
+    else:
+        import ossaudiodev
+
+        s = wave.open(FileName, 'rb')
+        (nc, sw, fr, nf, comptype, compname) = s.getparams()
+        dsp = ossaudiodev.open('/dev/dsp', 'w')
+        try:
+            from ossaudiodev import AFMT_S16_NE
+        except ImportError:
+            if byteorder == 'little':
+                AFMT_S16_NE = ossaudiodev.AFMT_S16_LE
+            else:
+                AFMT_S16_NE = ossaudiodev.AFMT_S16_BE
+        dsp.setparameters(AFMT_S16_NE, nc, fr)
+        data = s.readframes(nf)
+        s.close()
+        dsp.write(data)
+        dsp.close()
