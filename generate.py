@@ -6,7 +6,7 @@ import struct
 import re
 import wave
 
-if sys.argv.count() != 1:
+if len(sys.argv) != 1:
     print 'Please provide the correct parameters: number of seconds.'
     sys.exit(0)
 
@@ -19,7 +19,7 @@ DIRFILES   = [filename for filename in os.listdir(WAVEDIR) if os.path.isfile(WAV
 WAVPATTERN = re.compile('^randomwav\d{3}.wav')
 WAVFILES   = [file for file in DIRFILES if WAVPATTERN.match(file)]
 WAVFILES.sort()
-WAVFILECOUNT = WAVFILES.count()
+WAVFILECOUNT = len(WAVFILES)
 
 if WAVFILECOUNT > 1000:
     print 'Please clear your /wavs directory before continuing; too many random files have been generated.'
