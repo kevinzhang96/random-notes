@@ -58,3 +58,6 @@ target/
 
 # don't include any wav files in this project
 wavs*
+
+# don't include PyCharm IDEA files
+ideas/*
