@@ -60,4 +60,4 @@ target/
 wavs*
 
 # don't include PyCharm IDEA files
-ideas/*
+.idea/*
